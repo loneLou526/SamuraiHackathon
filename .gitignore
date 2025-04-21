@@ -1,0 +1,23 @@
+# Папка виртуального окружения
+venv/
+*/venv/
+.venv/
+env/
+*/env/
+.env/
+
+# Настройки IDE (PyCharm)
+.idea/
+
+# Байт-код Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Файлы окружения (если вы используете python-dotenv)
+.env*
+
+# Другие временные файлы или логи
+*.log
+*.tmp

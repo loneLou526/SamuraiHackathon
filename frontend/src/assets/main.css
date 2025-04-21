@@ -1,0 +1,143 @@
+/* src/assets/main.css */
+
+/* Импорт шрифтов с Google Fonts */
+/*@import url('https://fonts.googleapis.com/css2?family=Bonzai&display=swap');*/
+
+@font-face {
+  font-family: 'Bonzai Cyr'; /* Название, которое вы будете использовать в CSS */
+  src: url('../assets/fonts/bonzai.woff2') format('woff2'), /* Сначала WOFF2 */
+       url('../assets/fonts/bonzai.woff') format('woff'),   /* Потом WOFF */
+       url('../assets/fonts/bonzai.ttf') format('truetype');/* Пото
+  font-weight: normal; /* Или 400, если знаете точный вес */
+  font-style: normal;
+  font-display: swap; /* Позволяет браузеру использовать запасной шрифт, пока этот грузится */
+}
+
+/* CSS Переменные для темы */
+:root {
+  --samurai-bg: #1a1a2d; /* Темно-синий/почти черный фон */
+  --samurai-bg-light: #2d2d44; /* Чуть светлее для карточек/элементов */
+  --samurai-text: #e0e0e0; /* Светлый текст */
+  --samurai-text-dark: #333; /* Темный текст для светлых фонов */
+  --samurai-primary: #d32f2f; /* Основной акцент - красный */
+  --samurai-primary-dark: #b71c1c; /* Темнее красный для hover */
+  --samurai-secondary: #e6a23c; /* Вторичный акцент - золото/охра */
+  --samurai-border: #4f4f6f; /* Цвет границ */
+  --samurai-success: #4CAF50; /* Зеленый для успеха */
+  --samurai-error: var(--samurai-primary); /* Красный для ошибок */
+
+  /*--font-header: 'Montserrat', sans-serif;*/
+  /*--font-body: 'Lato', sans-serif;*/
+  --font-main: 'Bonzai Cyr', cursive;
+}
+
+/* Глобальные стили */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--samurai-bg);
+  color: var(--samurai-text);
+  line-height: 1.6;
+  font-size: 25px;
+}
+
+#app {
+  /* Можно добавить здесь общие настройки макета, если нужно */
+}
+
+/* Стилизация ссылок */
+a {
+  color: var(--samurai-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--samurai-primary);
+}
+
+/* Базовые стили для кнопок */
+button {
+  font-family: var(--font-main);
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--samurai-primary);
+  color: #fff;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+button:hover:not(:disabled) {
+  background-color: var(--samurai-primary-dark);
+}
+button:disabled {
+  background-color: var(--samurai-border);
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Базовые стили для инпутов */
+input[type="text"],
+input[type="password"],
+input[type="email"] { /* Добавь другие типы, если нужно */
+  font-family: var(--font-main);
+  padding: 10px;
+  border: 1px solid var(--samurai-border);
+  border-radius: 4px;
+  background-color: var(--samurai-bg-light);
+  color: var(--samurai-text);
+  width: 100%; /* Часто требуется, чтобы занимали всю ширину */
+  box-sizing: border-box; /* Чтобы padding не увеличивал размер */
+  font-size: 1.5rem;
+}
+input:focus {
+  outline: none;
+  border-color: var(--samurai-secondary);
+  box-shadow: 0 0 5px rgba(230, 162, 60, 0.5); /* Золотое свечение при фокусе */
+}
+
+/* Общие стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  font-weight: 400;
+  color: var(--samurai-text);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+    color: var(--samurai-primary); /* Главный заголовок - красным */
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+/* Стили для контейнеров страниц (общие) */
+.page-container {
+  max-width: 800px; /* Максимальная ширина контента */
+  margin: 40px auto; /* Центрирование и отступы сверху/снизу */
+  padding: 25px;
+  background-color: var(--samurai-bg-light);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative; /* Нужно для z-index */
+  z-index: 5;         /* Выше самураев */
+}
+
+/* Стили для сообщений */
+.loading {
+    text-align: center;
+    color: var(--samurai-secondary);
+    font-size: 1.1em;
+    margin: 20px 0;
+}
+.error-message {
+    text-align: center;
+    color: var(--samurai-error);
+    background-color: rgba(211, 47, 47, 0.1);
+    border: 1px solid var(--samurai-error);
+    padding: 10px;
+    border-radius: 4px;
+    margin: 15px 0;
+}

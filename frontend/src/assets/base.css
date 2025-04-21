@@ -1,0 +1,9 @@
+/* src/assets/main.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Дополнительные базовые стили, если нужно */
+body {
+  @apply bg-samurai-dark text-gray-200; /* Пример темной темы */
+}
