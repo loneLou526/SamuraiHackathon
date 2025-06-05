@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from backend.database import get_db
 from backend.models import Attempt, Team, Task, TeamProgress
-from backend.utils import get_current_team  # Функция для получения команды по токену
+from backend.utils import get_current_team 
 
 router = APIRouter()
 
@@ -50,10 +50,8 @@ async def get_current_task(
 async def submit_answer(answer_data: dict, team: Team = Depends(get_current_team), db: Session = Depends(get_db)):
     progress = db.query(TeamProgress).filter(TeamProgress.team_id == team.id).first()
 
-    if not progress or not progress.current_task_id:  # Объединил проверки
-        # Если нет прогресса или нет текущей задачи, команду не должно быть здесь
-        # Возможно, они уже финишировали или что-то пошло не так
-        # Можно вернуть ошибку или проверить финиш
+    if not progress or not progress.current_task_id:
+
         finished_already = progress and progress.finished_at is not None  # Проверяем, если есть поле finished_at
         if finished_already:
             return {"correct": True, "finished": True}  # Повторный запрос после финиша
@@ -79,20 +77,19 @@ async def submit_answer(answer_data: dict, team: Team = Depends(get_current_team
         # Переход к следующей задаче или финиш
         max_task_id = db.query(func.max(Task.id)).scalar() or 0  # Получаем макс ID
 
-        # Определяем ID следующей задачи
         next_task_id = progress.current_task_id + 1
 
         if next_task_id > max_task_id:
             # Финиш
             if progress.finished_at is None:
                 progress.finished_at = datetime.utcnow()
-            # progress.current_task_id = None # Опционально
+
             db.commit()  # Сохраняем и счетчик попыток, и время финиша
             return {"correct": True, "finished": True}
         else:
-            # Переход к следующей
+
             progress.current_task_id = next_task_id
-            db.commit()  # Сохраняем и счетчик попыток, и переход
+            db.commit()  
             return {"correct": True, "finished": False}
     else:
         # Ответ неверный, просто сохраняем обновленный счетчик попыток
