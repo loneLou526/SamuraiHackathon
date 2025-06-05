@@ -2,7 +2,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles  # <-- Импортировать
+from fastapi.staticfiles import StaticFiles 
 
 from backend.routes import auth, tasks, leaderboard, attempts
 
@@ -15,10 +15,10 @@ app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Разрешить запросы со всех источников (для разработки)
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешить все методы (GET, POST, OPTIONS и т.д.)
-    allow_headers=["*"],  # Разрешить все заголовки
+    allow_methods=["*"], 
+    allow_headers=["*"],  
 )
 
 app.include_router(auth.router, prefix="/api")
