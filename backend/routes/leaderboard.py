@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from backend.database import get_db
 from backend.models import Team, TeamProgress, Task
-from sqlalchemy import func # Добавь func
+from sqlalchemy import func
 from datetime import datetime
 router = APIRouter()
 
@@ -38,10 +38,10 @@ async def get_leaderboard(db: Session = Depends(get_db)):
             "finished_at": finished_at_timestamp # время финиша
         })
 
-    # Сортируем: сначала по решенным задачам (убывание), потом по времени финиша (возрастание, null в конце)
+    # Сортируем: сначала по решенным задачам (убывание), потом по времени финиша (возрастание)
     leaderboard.sort(key=lambda x: (
         -x["solved_tasks"],
-        x["finished_at"] if x["finished_at"] else datetime.max # None/null считается позже всех
+        x["finished_at"] if x["finished_at"] else datetime.max
     ))
 
     return {"teams": leaderboard}
