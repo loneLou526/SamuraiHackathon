@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.database import get_db
-from backend.models.team import Team # Модель команды
-from backend.schemas import TeamLogin  # Схема запроса
-from backend.utils import verify_password, generate_token  # Функции для проверки пароля и создания токена
+from backend.models.team import Team 
+from backend.schemas import TeamLogin  
+from backend.utils import verify_password, generate_token  
 
 router = APIRouter()
 
